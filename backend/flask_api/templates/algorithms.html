@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Algorithms | Fake Job Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+    <style>
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: none;
+            background-color: pink;
+            color: brown;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: pink;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .images img {
+            max-width: 300px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="sidebar">
+        <h2>Fake Job</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/dataset">Dataset</a></li>
+            <li><a href="/algorithms">Algorithms</a></li>
+            <li><a href="/comparison">Comparison</a></li>
+            <li><a href="/prediction">Prediction</a></li>
+        </ul>
+    </nav>
+
+    <main class="main">
+        <h1>Algorithm Evaluation Results</h1>
+
+        <!-- MODEL BUTTONS -->
+        <div class="btn-group">
+            <h3>Select Model</h3>
+            {% for model_key, model_name in models.items() %}
+            <button onclick="selectModel('{{ model_key }}')">
+                {{ model_name }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <!-- SPLIT BUTTONS -->
+        <div id="splitButtons" class="btn-group hidden">
+            <h3>Select Train–Test Split</h3>
+            {% for split in splits %}
+            <button onclick="selectSplit('{{ split }}')">
+                {{ split.replace("_", "-") }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <!-- IMAGES -->
+        <div id="imageSection" class="images hidden">
+            {% for split in splits %}
+                {% for model_key, model_name in models.items() %}
+                    {% for img in images %}
+                        <img
+                            src="{{ url_for('static',
+                            filename='assets/images/' + split + '/' + model_key + '/' + img) }}"
+                            data-model="{{ model_key }}"
+                            data-split="{{ split }}"
+                            class="result-image hidden"
+                            alt="{{ model_name }} {{ img }}"
+                        >
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+    </main>
+</div>
+
+<script>
+    let selectedModel = null;
+
+    function selectModel(model) {
+        selectedModel = model;
+        document.getElementById("splitButtons").classList.remove("hidden");
+        hideAllImages();
+    }
+
+    function selectSplit(split) {
+        hideAllImages();
+
+        const images = document.querySelectorAll(".result-image");
+        images.forEach(img => {
+            if (img.dataset.model === selectedModel && img.dataset.split === split) {
+                img.classList.remove("hidden");
+            }
+        });
+
+        document.getElementById("imageSection").classList.remove("hidden");
+    }
+
+    function hideAllImages() {
+        document.querySelectorAll(".result-image").forEach(img => {
+            img.classList.add("hidden");
+        });
+    }
+</script>
+
+</body>
+</html>

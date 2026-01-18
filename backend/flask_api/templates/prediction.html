@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction | Fake Job Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+    <!-- ===== Scoped CSS ONLY for Prediction Page ===== -->
+    <style>
+        /* Page wrapper */
+        .prediction-page {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Centered container for form + gauge */
+        .prediction-wrapper {
+            max-width: 900px;      /* controls distance */
+        }
+
+        /* Row holding form + gauge */
+        .prediction-row {
+            display: flex;
+            gap: 20px;             /* small clean gap */
+            align-items: flex-start;
+        }
+
+        /* Form container */
+        .form-box {
+            flex: 1;
+        }
+
+        /* Result gauge card */
+        .prediction-page .result-panel {
+            width: 260px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            display: none; /* shown via JS */
+        }
+
+        /* Prediction title */
+        #resultText {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        /* Circular meter */
+        .meter {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: auto;
+        }
+
+        .meter svg {
+            transform: rotate(-90deg);
+        }
+
+        .meter circle {
+            fill: none;
+            stroke-width: 12;
+        }
+
+        .meter .bg {
+            stroke: #eee;
+        }
+
+        .meter .progress {
+            stroke: #43a047;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        /* Percentage text */
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 900px) {
+            .prediction-row {
+                flex-direction: column;
+            }
+
+            .prediction-page .result-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="sidebar">
+        <h2>Fake Job</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/dataset">Dataset</a></li>
+            <li><a href="/algorithms">Algorithms</a></li>
+            <li><a href="/comparison">Comparison</a></li>
+            <li><a href="/prediction">Prediction</a></li>
+        </ul>
+    </nav>
+
+    <main class="main prediction-page">
+
+        <h1>Job Fraud Prediction</h1>
+
+        <!-- ===== FORM + GAUGE (CLOSE TO EACH OTHER) ===== -->
+        <div class="prediction-wrapper">
+            <div class="prediction-row">
+
+                <!-- FORM -->
+                <div class="form-box">
+                    <form onsubmit="predictJob(event)">
+                        <input type="text" id="job_title" placeholder="Job Title" required>
+
+                        <textarea id="job_description" rows="5"
+                            placeholder="Job Description" required></textarea>
+
+                        <input type="text" id="requirements" placeholder="Requirements" required>
+
+                        <input type="text" id="salary"
+                            placeholder="Salary (e.g. 20000 per month)">
+
+                        <button type="submit">Check Job</button>
+                    </form>
+                </div>
+
+                <!-- RESULT GAUGE -->
+                <div class="result-panel" id="resultPanel">
+                    <h2 id="resultText">Prediction</h2>
+
+                    <div class="meter">
+                        <svg width="160" height="160">
+                            <circle cx="80" cy="80" r="70" class="bg" />
+                            <circle cx="80" cy="80" r="70" class="progress" />
+                        </svg>
+                        <div class="percentage" id="confidenceText">0%</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== HOW TO USE (AFTER FORM SECTION) ===== -->
+        <aside class="guide">
+            <h3>How to use?</h3>
+            <ul>
+                <li>Enter complete job details</li>
+                <li>Avoid short descriptions</li>
+                <li>Click Check Job</li>
+            </ul>
+            <p><strong>Result:</strong> Real / Fake with confidence</p>
+        </aside>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+</html>

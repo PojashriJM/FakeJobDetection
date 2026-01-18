@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparison | Fake Job Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <style>
+        img {
+            max-width: 600px;
+            margin: 20px;
+            flex: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="sidebar">
+        <h2>Fake Job</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/dataset">Dataset</a></li>
+            <li><a href="/algorithms">Algorithms</a></li>
+            <li><a href="/comparison">Comparison</a></li>
+            <li><a href="/prediction">Prediction</a></li>
+        </ul>
+    </nav>
+
+    <main class="main">
+        <h1>Algorithm Comparison</h1>
+
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Algorithm</th>
+                <th>Accuracy</th>
+                <th>AUC</th>
+            </tr>
+            <tr>
+                <td>Logistic Regression</td>
+                <td>85%</td>
+                <td>0.88</td>
+            </tr>
+            <tr>
+                <td>Random Forest</td>
+                <td>89%</td>
+                <td>0.91</td>
+            </tr>
+            <tr>
+                <td>CNN</td>
+                <td>92%</td>
+                <td>0.94</td>
+            </tr>
+            <tr>
+                <td>LSTM</td>
+                <td>94%</td>
+                <td>0.96</td>
+            </tr>
+        </table>
+        <div>
+    <img src="{{ url_for('static', filename='assets/images/model_accuracy_comparison.png') }}" alt="AUC Comparison Chart">
+    <img src="{{ url_for('static', filename='assets/images/model_comparison_combined.png') }}" alt="Combined Comparison Chart">
+    <img src="{{ url_for('static', filename='assets/images/model_roc_auc_comparison.png') }}" alt="ROC-AUC Comparison Chart">
+</div>
+    </main>
+</div>
+
+
+</body>
+</html>

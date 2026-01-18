@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Job Detection | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <h2>Fake Job</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/dataset">Dataset</a></li>
+            <li><a href="/algorithms">Algorithms</a></li>
+            <li><a href="/comparison">Comparison</a></li>
+            <li><a href="/prediction">Prediction</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <h1>Dashboard</h1>
+        <p>Welcome to Fake Job Detection System</p>
+
+        <div class="cards">
+            <a href="dataset.html" class="card" id="card1">Explore Dataset <br><br> <h5>Explore Dataset provides a complete overview of the job posting data used in this project.
+It displays the total number of jobs, real jobs, and fake jobs, along with dataset statistics such as data distribution and key attributes.</h5></a>
+            <a href="algorithms.html" class="card" id="card2">View Algorithms <br><br> <h5>View Algorithms explains the machine learning and deep learning models used for fake job detection.
+The algorithms implemented include Logistic Regression, Random Forest, CNN, and LSTM.</h5></a>
+            <a href="comparison.html" class="card" id="card3">Compare Models <br><br> <h5>Compare Models presents a comparative analysis of all implemented algorithms.
+It evaluates each model based on accuracy, precision, recall, F1-score, and AUC values.</h5></a>
+            <a href="prediction.html" class="card" id="card4">Predict Job Fraud <br><br> <h5>Fake Job Detection allows users to check whether a job posting is real or fraudulent by entering job details such as job title, description, and location.</h5></a>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
