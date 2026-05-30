@@ -141,17 +141,6 @@ Real Job / Fake Job
 
 ---
 
-## 🔮 Future Enhancements
-
-- Skill Gap Analysis
-- Company Credibility Verification
-- Salary Anomaly Detection
-- Resume–Job Matching
-- Explainable AI Predictions
-- Multi-language Support
-
----
-
 ##  Internship Information
 
 **Role:** AI & Data Science Intern  
@@ -175,6 +164,6 @@ GitHub: [PojashriJM](https://github.com/PojashriJM)
 
 ---
 
-## 📜 License
+##  License
 
 This project is intended for educational, research, and learning purposes.
