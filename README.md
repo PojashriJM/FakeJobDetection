@@ -9,6 +9,10 @@ The system helps identify fraudulent job postings by analyzing job descriptions 
 The primary objective of this project is to protect job seekers from scam job advertisements and improve trust in online recruitment platforms.
 
 ---
+## Live Demo
+https://fakejobdetection.onrender.com/
+
+---
 
 ##  Features
 
