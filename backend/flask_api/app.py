@@ -54,7 +54,10 @@ def load_models():
         cnn_model = load_model(os.path.join(BASE_DIR, "models", "cnn.keras"))
 
     if lstm_model is None:
-        lstm_model = load_model(os.path.join(BASE_DIR, "models", "lstm.keras"))
+        lstm_model = load_model(
+        os.path.join(BASE_DIR, "models", "lstm_compatible.keras"),
+        compile=False
+    )
 
     if tokenizer is None:
         with open(os.path.join(BASE_DIR, "models", "tokenizer.pkl"), "rb") as f:
@@ -165,6 +168,4 @@ def predict():
 # ================= RUN SERVER =================
 
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 3000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=5000)
