@@ -11,6 +11,15 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 app = Flask(__name__)
 CORS(app)
 
+# Lightweight health-check endpoint
+@app.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({
+        "status": "ok",
+        "service": "fake-job-detection"
+    }), 200
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MAX_LEN = 300
 
