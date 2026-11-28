@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dataset | Fake Job Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
-    <style>
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset | Fake Job Detection</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 </head>
 <body>
-
 <div class="container">
-    <nav class="sidebar">
-        <h2>Fake Job</h2>
-        <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/dataset">Dataset</a></li>
-            <li><a href="/algorithms">Algorithms</a></li>
-            <li><a href="/comparison">Comparison</a></li>
-            <li><a href="/prediction">Prediction</a></li>
-        </ul>
-    </nav>
-
-    <main class="main">
-        <h1>Dataset Overview</h1>
-
-        <div class="stats">
-            <div class="stat-box">Total Jobs<br><strong><span style="color: brown;">17,000</span></strong></div>
-            <div class="stat-box">Real Jobs<br><strong><span style="color: brown;">13,500</span></strong></div>
-            <div class="stat-box">Fake Jobs<br><strong><span style="color: brown;">3,500</span></strong></div>
-        </div>
-
-        <section>
-            <h2>Dataset Statistics</h2>
-            <p>Dataset contains job title, description, location, company profile and fraud labels.</p>
-        </section>
-
-        <section>
-            <h2>Existing Datasets</h2>
-            <table border="1" cellpadding="10">
-            <tr>
-                <th style="color: brown; background-color: pink;">Dataset Name</th>
-                <th style="color: brown;background-color: pink;">Total Jobs</th>
-                <th style="color: brown;background-color: pink;">Fake Jobs</th>
-                <th style="color: brown;background-color: pink;">Real Jobs</th>
-            </tr>
-            <tr>
-                <td>Fake_job_detection_dataset.csv</td>
-                <td>17000</td>
-                <td>3500</td>
-                <td>13500</td>
-            </tr>
-           
-        </table>
-        </section>
-    </main>
+<nav class="sidebar">
+<h2>Fake Job</h2>
+<ul>
+<li><a href="/">Dashboard</a></li>
+<li><a href="/dataset" class="active">Dataset</a></li>
+<li><a href="/algorithms">Algorithms</a></li>
+<li><a href="/comparison">Comparison</a></li>
+<li><a href="/prediction">Prediction</a></li>
+</ul>
+</nav>
+<main class="main">
+<h1>Dataset Overview</h1>
+<div class="stats">
+<div class="stat-box">Total Jobs<br><strong>17,000</strong></div>
+<div class="stat-box">Real Jobs<br><strong>13,500</strong></div>
+<div class="stat-box">Fake Jobs<br><strong>3,500</strong></div>
 </div>
 
+<div class="split-bar" role="img" aria-label="79% real jobs, 21% fake jobs">
+<span class="real" style="width: 79.4%"></span>
+<span class="fake" style="width: 20.6%"></span>
+</div>
+<p class="split-legend">
+<span><i class="dot-real"></i>Real jobs (79%)</span>
+<span><i class="dot-fake"></i>Fake jobs (21%)</span>
+</p>
+
+<section>
+<h2>Dataset Statistics</h2>
+<p>Dataset contains job title, description, location, company profile and fraud labels.</p>
+</section>
+<section>
+<h2>Existing Datasets</h2>
+<table border="1" cellpadding="10">
+<tr>
+<th>Dataset Name</th>
+<th>Total Jobs</th>
+<th>Fake Jobs</th>
+<th>Real Jobs</th>
+</tr>
+<tr>
+<td>Fake_job_detection_dataset.csv</td>
+<td>17000</td>
+<td>3500</td>
+<td>13500</td>
+</tr>
+</table>
+</section>
+</main>
+</div>
 </body>
 </html>

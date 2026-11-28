@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Fake Job Detection | Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard | Fake Job Detection</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 </head>
 <body>
-
 <div class="container">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-        <h2>Fake Job</h2>
-        <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/dataset">Dataset</a></li>
-            <li><a href="/algorithms">Algorithms</a></li>
-            <li><a href="/comparison">Comparison</a></li>
-            <li><a href="/prediction">Prediction</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main">
-        <h1>Dashboard</h1>
-        <p>Welcome to Fake Job Detection System</p>
-
-        <div class="cards">
-            <a href="dataset.html" class="card" id="card1">Explore Dataset <br><br> <h5>Explore Dataset provides a complete overview of the job posting data used in this project.
+<nav class="sidebar">
+<h2>Fake Job</h2>
+<ul>
+<li><a href="/" class="active">Dashboard</a></li>
+<li><a href="/dataset">Dataset</a></li>
+<li><a href="/algorithms">Algorithms</a></li>
+<li><a href="/comparison">Comparison</a></li>
+<li><a href="/prediction">Prediction</a></li>
+</ul>
+</nav>
+<main class="main">
+<h1>Dashboard</h1>
+<p>Welcome to Fake Job Detection System</p>
+<div class="cards">
+<a href="/dataset" class="card" id="card1">
+<span class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+Explore Dataset
+<h5>Explore Dataset provides a complete overview of the job posting data used in this project.
 It displays the total number of jobs, real jobs, and fake jobs, along with dataset statistics such as data distribution and key attributes.</h5></a>
-            <a href="algorithms.html" class="card" id="card2">View Algorithms <br><br> <h5>View Algorithms explains the machine learning and deep learning models used for fake job detection.
+<a href="/algorithms" class="card" id="card2">
+<span class="card-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 6l10 6M7 18l10-6"/></svg></span>
+View Algorithms
+<h5>View Algorithms explains the machine learning and deep learning models used for fake job detection.
 The algorithms implemented include Logistic Regression, Random Forest, CNN, and LSTM.</h5></a>
-            <a href="comparison.html" class="card" id="card3">Compare Models <br><br> <h5>Compare Models presents a comparative analysis of all implemented algorithms.
+<a href="/comparison" class="card" id="card3">
+<span class="card-icon"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></span>
+Compare Models
+<h5>Compare Models presents a comparative analysis of all implemented algorithms.
 It evaluates each model based on accuracy, precision, recall, F1-score, and AUC values.</h5></a>
-            <a href="prediction.html" class="card" id="card4">Predict Job Fraud <br><br> <h5>Fake Job Detection allows users to check whether a job posting is real or fraudulent by entering job details such as job title, description, and location.</h5></a>
-        </div>
-    </main>
+<a href="/prediction" class="card" id="card4">
+<span class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+Predict Job Fraud
+<h5>Fake Job Detection allows users to check whether a job posting is real or fraudulent by entering job details such as job title, description, and location.</h5></a>
 </div>
-
+</main>
+</div>
 </body>
 </html>

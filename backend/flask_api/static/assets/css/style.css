@@ -1,108 +1,293 @@
+/* ==========================================================
+   Palette: magenta + purple + red wine
+   ========================================================== */
+:root {
+    --wine-900: #2b0a1f;
+    --wine-800: #4a0d2e;
+    --wine-700: #6b1243;
+    --plum-700: #4b1670;
+    --purple-600: #7b2cbf;
+    --purple-500: #9b4de0;
+    --magenta-600: #c2185b;
+    --magenta-500: #e0287f;
+    --magenta-400: #f0589f;
+    --orchid-200: #ecd2f5;
+    --blush-100: #fde8f3;
+    --blush-50: #fff6fb;
+    --ink: #3a1230;
+    --ink-soft: #7a5470;
+
+    --grad-main: linear-gradient(135deg, var(--purple-600), var(--magenta-500));
+    --grad-wine: linear-gradient(160deg, var(--wine-900) 0%, var(--wine-800) 45%, var(--plum-700) 100%);
+
+    --shadow-sm: 0 4px 14px rgba(107, 18, 67, 0.12);
+    --shadow-lg: 0 16px 36px rgba(123, 44, 191, 0.25);
+    --radius: 16px;
+}
+
 /* --------- Global Reset --------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #8E32E9;
-    background: linear-gradient(to right, #fad0c4, #ffd1ff);
-    color: #e51e74;
+    background-color: var(--blush-100);
+    background: linear-gradient(135deg, var(--blush-100) 0%, #f6dcf7 50%, var(--orchid-200) 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    line-height: 1.55;
+}
+
+/* Soft glowing orbs behind everything */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::before {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(224, 40, 127, 0.35), transparent 70%);
+}
+
+body::after {
+    width: 480px;
+    height: 480px;
+    bottom: -160px;
+    left: 120px;
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.32), transparent 70%);
+}
+
+/* Keyboard focus, visible everywhere */
+:focus-visible {
+    outline: 3px solid var(--magenta-400);
+    outline-offset: 2px;
 }
 
 /* --------- Layout --------- */
 .container {
     display: flex;
     min-height: 100vh;
-    
 }
 
 /* --------- Sidebar --------- */
 .sidebar {
-    width: 220px;
-    background-color: #fad0c4;
-    color: #420642;
-    padding: 20px;
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--grad-wine);
+    color: #fff;
+    padding: 28px 18px;
+    box-shadow: 6px 0 30px rgba(43, 10, 31, 0.3);
+}
+
+/* Decorative concentric rings at the bottom of the sidebar */
+.sidebar::after {
+    content: "";
+    position: absolute;
+    left: -70px;
+    bottom: -70px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, transparent 38%, rgba(240, 88, 159, 0.35) 39%, transparent 41%),
+        radial-gradient(circle, transparent 54%, rgba(155, 77, 224, 0.35) 55%, transparent 57%),
+        radial-gradient(circle, transparent 70%, rgba(240, 88, 159, 0.22) 71%, transparent 73%),
+        radial-gradient(circle, rgba(224, 40, 127, 0.45), transparent 62%);
+    pointer-events: none;
 }
 
 .sidebar h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 34px;
     font-size: 22px;
-    color: #420642;
+    letter-spacing: 0.4px;
+    color: #fff;
+}
+
+/* Small gradient gem above the title */
+.sidebar h2::before {
+    content: "";
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    background: var(--grad-main);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12), 0 8px 22px rgba(224, 40, 127, 0.55);
 }
 
 .sidebar ul {
     list-style: none;
+    position: relative;
+    z-index: 1;
 }
 
 .sidebar ul li {
-    margin: 15px 0;
+    margin: 8px 0;
 }
 
 .sidebar ul li a {
-    color: #e51e74;
+    position: relative;
+    color: #f6d9ea;
     text-decoration: none;
     font-size: 16px;
     display: block;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 11px 14px 11px 18px;
+    border-radius: 10px;
+    transition: background 0.25s, color 0.25s, padding-left 0.25s, box-shadow 0.25s;
 }
 
-.sidebar ul li a:hover {
-    background-color:#420642;
-    color: white;
+/* Glowing marker on the left edge */
+.sidebar ul li a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 0;
+    border-radius: 4px;
+    background: var(--magenta-400);
+    box-shadow: 0 0 12px var(--magenta-400);
+    transform: translateY(-50%);
+    transition: height 0.25s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active,
+.sidebar ul li a[aria-current="page"] {
+    background: linear-gradient(90deg, rgba(224, 40, 127, 0.55), rgba(123, 44, 191, 0.35));
+    color: #fff;
+    padding-left: 24px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar ul li a:hover::before,
+.sidebar ul li a.active::before,
+.sidebar ul li a[aria-current="page"]::before {
+    height: 60%;
 }
 
 /* --------- Main Content --------- */
 .main {
     flex: 1;
-    padding: 30px;
-    
+    min-width: 0;
+    padding: 36px;
 }
 
 .main h1 {
     margin-bottom: 10px;
-    font-size: 28px;
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    background: linear-gradient(90deg, var(--wine-700), var(--purple-600) 55%, var(--magenta-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--wine-700);
+}
+
+/* Underline bar with a small dot */
+.main h1::after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: var(--grad-main);
+    box-shadow: 84px 0 0 -1px var(--magenta-400);
 }
 
 .main p {
     margin-bottom: 20px;
-    color: #555;
+    color: var(--ink-soft);
 }
 
 /* --------- Dashboard Cards --------- */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
     margin-top: 30px;
 }
 
 .card {
-    background-color: #fff;
-    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fff 0%, var(--blush-50) 100%);
+    padding: 34px 30px;
     text-align: center;
     font-size: 18px;
-    border-radius: 10px;
+    font-weight: 600;
+    border-radius: var(--radius);
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--wine-800);
+    border: 1px solid rgba(155, 77, 224, 0.15);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Gradient strip along the top */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: var(--grad-main);
+}
+
+/* Ring graphic in the corner */
+.card::after {
+    content: "";
+    position: absolute;
+    right: -46px;
+    bottom: -46px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, transparent 42%, rgba(224, 40, 127, 0.16) 43%, transparent 46%),
+        radial-gradient(circle, transparent 62%, rgba(123, 44, 191, 0.16) 63%, transparent 66%),
+        radial-gradient(circle, rgba(224, 40, 127, 0.12), transparent 60%);
+    transition: transform 0.5s;
+    pointer-events: none;
 }
 
 .card h5 {
     font-size: 14px;
-    color: #666;
+    font-weight: 400;
+    color: var(--ink-soft);
     margin-top: 10px;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    color: #e51e74;
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--magenta-400);
+    color: var(--magenta-600);
+}
+
+.card:hover::after {
+    transform: scale(1.35) rotate(25deg);
 }
 
 /* --------- Dataset Stats --------- */
@@ -113,105 +298,206 @@ body {
 }
 
 .stat-box {
-    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
     flex: 1;
-    padding: 20px;
+    padding: 24px 20px;
     text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: var(--radius);
+    border-left: 5px solid var(--magenta-500);
+    box-shadow: var(--shadow-sm);
     font-size: 16px;
+    color: var(--ink-soft);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Soft purple circle behind the number */
+.stat-box::after {
+    content: "";
+    position: absolute;
+    top: -34px;
+    right: -34px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155, 77, 224, 0.22), transparent 70%);
+    pointer-events: none;
 }
 
 .stat-box strong {
-    font-size: 24px;
-    color: #1e88e5;
+    display: block;
+    font-size: 30px;
+    background: var(--grad-main);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--magenta-600);
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    border-left-color: var(--purple-600);
+    box-shadow: var(--shadow-lg);
 }
 
 /* --------- Algorithm Sections --------- */
 .algo {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    background: #fff;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    border-left: 5px solid var(--purple-500);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
 .algo h2 {
     margin-bottom: 8px;
+    color: var(--wine-700);
+}
+
+.algo:hover {
+    transform: translateX(6px);
+    border-left-color: var(--magenta-500);
+    box-shadow: var(--shadow-lg);
 }
 
 /* --------- Tables --------- */
 table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
     margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
-table th, table td {
-    padding: 12px;
+table th,
+table td {
+    padding: 13px 12px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--blush-100);
 }
 
 table th {
-    background-color: #1e88e5;
-    color: white;
+    background: linear-gradient(90deg, var(--wine-800), var(--purple-600));
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+table tbody tr {
+    transition: background 0.2s;
+}
+
+table tbody tr:nth-child(even) {
+    background: var(--blush-50);
+}
+
+table tbody tr:hover {
+    background: var(--orchid-200);
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 /* --------- Forms --------- */
 form {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
+    background: #fff;
+    padding: 28px;
+    border-radius: var(--radius);
     max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-top: 5px solid var(--magenta-500);
+    box-shadow: var(--shadow-sm);
 }
 
 form label {
     font-weight: 600;
+    color: var(--wine-700);
 }
 
-form input, form textarea {
+form input,
+form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 11px 12px;
     margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--orchid-200);
+    background: var(--blush-50);
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+form input:hover,
+form textarea:hover {
+    border-color: var(--purple-500);
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--magenta-500);
+    box-shadow: 0 0 0 4px rgba(224, 40, 127, 0.18);
 }
 
 form button {
-    background-color: #1e88e5;
+    background: linear-gradient(135deg, var(--purple-600), var(--magenta-500));
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 26px;
     border: none;
-    border-radius: 6px;
+    border-radius: 999px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 8px 20px rgba(224, 40, 127, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
 }
 
 form button:hover {
-    background-color: #1565c0;
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 26px rgba(123, 44, 191, 0.45);
+}
+
+form button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(224, 40, 127, 0.35);
 }
 
 /* --------- Prediction Guide --------- */
 .guide {
     margin-top: 30px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #fff, var(--blush-50));
+    padding: 22px 24px;
+    border-radius: var(--radius);
     max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    
+    border: 1px dashed var(--purple-500);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.guide:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .guide h3 {
     margin-bottom: 10px;
+    color: var(--wine-700);
 }
 
 .guide ul {
     padding-left: 20px;
+}
+
+.guide ul li::marker {
+    color: var(--magenta-500);
 }
 
 /* --------- Responsive --------- */
@@ -221,11 +507,662 @@ form button:hover {
     }
 
     .sidebar {
+        position: relative;
         width: 100%;
+        height: auto;
         text-align: center;
+        padding: 20px;
+    }
+
+    .sidebar h2::before {
+        width: 28px;
+        height: 28px;
+    }
+
+    .main {
+        padding: 22px 16px;
     }
 
     .stats {
         flex-direction: column;
+    }
+}
+
+/* --------- Reduced motion --------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    .card:hover,
+    .stat-box:hover,
+    .algo:hover,
+    .guide:hover,
+    form button:hover {
+        transform: none;
+    }
+}
+
+/* ==========================================================
+   ADDITIONS FOR THE FAKE JOB DETECTION PAGES
+   (these replace the <style> blocks that used to sit inside
+    the individual HTML templates)
+   ========================================================== */
+
+/* Utility: works for .images.hidden too */
+.hidden {
+    display: none !important;
+}
+
+/* Section headings and text on Dataset page */
+.main section {
+    margin-top: 28px;
+}
+
+.main section h2 {
+    color: var(--wine-700);
+    margin-bottom: 6px;
+}
+
+/* Tables written with border="1" cellpadding="10" */
+table[border] {
+    border: none;
+}
+
+/* --------- Dashboard card icons --------- */
+.card-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    background: var(--grad-main);
+    box-shadow: 0 10px 22px rgba(123, 44, 191, 0.35);
+    transition: transform 0.3s, border-radius 0.3s;
+}
+
+.card-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.card:hover .card-icon {
+    transform: rotate(-6deg) scale(1.08);
+    border-radius: 50%;
+}
+
+#card2 .card-icon { background: linear-gradient(135deg, var(--plum-700), var(--purple-500)); }
+#card3 .card-icon { background: linear-gradient(135deg, var(--wine-700), var(--magenta-500)); }
+#card4 .card-icon { background: linear-gradient(135deg, var(--magenta-600), var(--wine-800)); }
+
+/* --------- Dataset: real vs fake split bar --------- */
+.split-bar {
+    display: flex;
+    height: 16px;
+    margin-top: 6px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--orchid-200);
+    box-shadow: inset 0 1px 3px rgba(75, 22, 112, 0.25);
+}
+
+.split-bar .real {
+    background: linear-gradient(90deg, var(--purple-600), var(--purple-500));
+    transition: filter 0.2s;
+}
+
+.split-bar .fake {
+    background: linear-gradient(90deg, var(--magenta-500), var(--wine-700));
+    transition: filter 0.2s;
+}
+
+.split-bar span:hover {
+    filter: brightness(1.2);
+}
+
+.split-legend {
+    display: flex;
+    gap: 22px;
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+}
+
+.split-legend i {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+
+.split-legend .dot-real { background: var(--purple-600); }
+.split-legend .dot-fake { background: var(--magenta-500); }
+
+/* --------- Algorithms page: selector buttons --------- */
+.btn-group {
+    margin-bottom: 22px;
+}
+
+.btn-group h3 {
+    margin-bottom: 12px;
+    color: var(--wine-700);
+}
+
+.btn-group button {
+    padding: 11px 20px;
+    margin: 0 10px 10px 0;
+    border: 1.5px solid var(--purple-500);
+    background: #fff;
+    color: var(--plum-700);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-group button:hover {
+    background: var(--orchid-200);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-group button.active {
+    background: var(--grad-main);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(224, 40, 127, 0.35);
+}
+
+.hint {
+    color: var(--ink-soft);
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px dashed var(--purple-500);
+    background: rgba(255, 255, 255, 0.55);
+    max-width: 460px;
+}
+
+/* --------- Result / comparison images --------- */
+.images,
+.chart-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 22px;
+}
+
+.images img,
+.chart-grid img {
+    max-width: min(100%, 420px);
+    height: auto;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid var(--orchid-200);
+    border-radius: 14px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.chart-grid img {
+    max-width: min(100%, 560px);
+}
+
+.images img:hover,
+.chart-grid img:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--magenta-400);
+}
+
+/* --------- Comparison table extras --------- */
+.meter-bar {
+    height: 7px;
+    margin: 7px auto 0;
+    max-width: 120px;
+    border-radius: 999px;
+    background: var(--orchid-200);
+    overflow: hidden;
+}
+
+.meter-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--grad-main);
+}
+
+table tbody tr.best td {
+    font-weight: 700;
+    color: var(--magenta-600);
+    background: linear-gradient(90deg, rgba(123, 44, 191, 0.08), rgba(224, 40, 127, 0.14));
+}
+
+/* --------- Prediction page --------- */
+.prediction-page {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.prediction-wrapper {
+    max-width: 900px;
+}
+
+.prediction-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.form-box {
+    flex: 1;
+}
+
+.form-box form {
+    max-width: none;
+}
+
+.prediction-page .result-panel {
+    position: relative;
+    overflow: hidden;
+    width: 270px;
+    background: linear-gradient(180deg, #fff, var(--blush-50));
+    border-radius: 20px;
+    padding: 26px;
+    text-align: center;
+    border: 1px solid rgba(155, 77, 224, 0.2);
+    box-shadow: var(--shadow-lg);
+    display: none; /* shown by main.js */
+}
+
+.prediction-page .result-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: var(--grad-main);
+}
+
+#resultText {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    color: var(--wine-700);
+}
+
+.meter {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: auto;
+}
+
+.meter svg {
+    transform: rotate(-90deg);
+}
+
+.meter circle {
+    fill: none;
+    stroke-width: 12;
+}
+
+.meter .bg {
+    stroke: var(--orchid-200);
+}
+
+.meter .progress {
+    stroke: url(#gaugeGrad);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--wine-700);
+}
+
+@media (max-width: 900px) {
+    .prediction-row {
+        flex-direction: column;
+    }
+
+    .prediction-page .result-panel {
+        width: 100%;
+    }
+}
+
+/* ==========================================================
+   MOBILE + TABLET RESPONSIVENESS
+   Paste at the VERY END of style.css (order matters: these
+   rules must come after the earlier ones to override them)
+   ========================================================== */
+
+/* Never allow sideways page scroll */
+body {
+    overflow-x: clip;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+/* --------- Tablet (769px - 1024px) --------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+        padding: 24px 14px;
+    }
+
+    .main {
+        padding: 28px 24px;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+    }
+
+    .stat-box {
+        min-width: 160px;
+    }
+
+    .cards {
+        gap: 18px;
+    }
+}
+
+/* --------- Phones and small tablets (up to 768px) --------- */
+@media (max-width: 768px) {
+
+    /* Sidebar becomes a sticky top bar with a swipeable menu */
+    .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        height: auto;
+        padding: 12px 14px 10px;
+        text-align: left;
+        box-shadow: 0 6px 20px rgba(43, 10, 31, 0.35);
+    }
+
+    .sidebar::after {
+        display: none; /* hide the decorative rings */
+    }
+
+    .sidebar h2 {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .sidebar h2::before {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        margin: 0;
+        border-radius: 7px;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12), 0 4px 12px rgba(224, 40, 127, 0.5);
+    }
+
+    .sidebar ul {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .sidebar ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar ul li {
+        margin: 0;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+
+    .sidebar ul li a {
+        padding: 9px 16px;
+        font-size: 15px;
+        white-space: nowrap;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Left marker and slide effect make no sense in a pill row */
+    .sidebar ul li a::before {
+        display: none;
+    }
+
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active,
+    .sidebar ul li a[aria-current="page"] {
+        padding-left: 16px;
+        background: var(--grad-main);
+        box-shadow: 0 4px 12px rgba(224, 40, 127, 0.4);
+    }
+
+    /* Content spacing */
+    .main {
+        padding: 22px 16px 32px;
+    }
+
+    .main h1 {
+        font-size: 25px;
+    }
+
+    .main h1::after {
+        width: 56px;
+        box-shadow: 68px 0 0 -1px var(--magenta-400);
+    }
+
+    .main section h2,
+    .algo h2 {
+        font-size: 20px;
+    }
+
+    /* Cards: one column, tighter padding */
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 22px;
+    }
+
+    .card {
+        padding: 26px 20px;
+        font-size: 17px;
+    }
+
+    .card-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 14px;
+    }
+
+    /* Stats stack */
+    .stats {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .stat-box {
+        padding: 18px 16px;
+    }
+
+    .stat-box strong {
+        font-size: 26px;
+    }
+
+    .split-legend {
+        flex-wrap: wrap;
+        gap: 8px 18px;
+    }
+
+    /* Tables scroll sideways inside their own box */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 14px;
+    }
+
+    table tbody {
+        display: table;
+        width: 100%;
+        min-width: 460px;
+    }
+
+    table th,
+    table td {
+        padding: 11px 10px;
+    }
+
+    /* Buttons on the Algorithms page: easy to tap */
+    .btn-group button {
+        min-height: 44px;
+        padding: 10px 18px;
+        margin: 0 8px 8px 0;
+    }
+
+    .hint {
+        max-width: 100%;
+    }
+
+    /* Charts and result images fill the width */
+    .images,
+    .chart-grid {
+        gap: 16px;
+    }
+
+    .images img,
+    .chart-grid img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Forms */
+    form {
+        max-width: 100%;
+        padding: 20px 16px;
+    }
+
+    form input,
+    form textarea {
+        font-size: 16px; /* stops iOS from zooming in on focus */
+        min-height: 46px;
+    }
+
+    form button {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    /* Prediction page */
+    .prediction-wrapper {
+        max-width: 100%;
+    }
+
+    .prediction-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .form-box {
+        width: 100%;
+    }
+
+    .prediction-page .result-panel {
+        width: 100%;
+    }
+
+    .guide {
+        max-width: 100%;
+        margin-top: 4px;
+    }
+}
+
+/* --------- Small phones (up to 480px) --------- */
+@media (max-width: 480px) {
+    .main {
+        padding: 18px 12px 28px;
+    }
+
+    .main h1 {
+        font-size: 22px;
+    }
+
+    .card {
+        padding: 22px 16px;
+        font-size: 16px;
+    }
+
+    .card h5 {
+        font-size: 13px;
+    }
+
+    .meter {
+        width: 140px;
+        height: 140px;
+    }
+
+    .meter svg {
+        width: 140px;
+        height: 140px;
+    }
+
+    .percentage {
+        font-size: 24px;
+    }
+
+    #resultText {
+        font-size: 19px;
+    }
+}
+
+/* --------- Touch screens: no "stuck" hover effects --------- */
+@media (hover: none) {
+    .card:hover,
+    .stat-box:hover,
+    .algo:hover,
+    .guide:hover,
+    .images img:hover,
+    .chart-grid img:hover,
+    .btn-group button:hover,
+    form button:hover {
+        transform: none;
+    }
+
+    .card:hover::after {
+        transform: none;
+    }
+
+    .card:hover .card-icon {
+        transform: none;
+        border-radius: 20px;
     }
 }
